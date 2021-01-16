@@ -79,66 +79,28 @@ add n (Node a x y)
   | n > a || n == a = (Node a x (add n y))
   | n < a = (Node a (add n x) y)
 
--- | fromList. Pasa una lista a un árbol de forma ordenada.
-fromList :: Ord a => [a] -> BTree a
-fromList    [] = arbolitos[]
-fromList   [a] = arbolitos[a]
-fromList    xs = arbolitos(from (fro1(half1 xs)) (fro1(half2 xs)))
+-- | fromList. Pasa una lista a un árbol de forma ordenada.                                                         
+fromList ::(Ord a)=> [a] -> BTree a                                                                                 
+fromList [] = Void                                                                                                  
+fromList [a] = Node a Void Void                                                                                     
+fromList (x:xs) = arbolitos(from (x:xs))                                                                            
 
--- | fro1. Función Auxiliar funciona como fromList pero devuelve una lista.
-fro1 [] = []
-fro1 [a]= [a]
-fro1 xs = from (fro1(half1 xs)) (fro1(half2 xs))
+-- | Pasa una lista a un árbol.
+arbolitos :: Ord a => [a] -> BTree a                                                                                
+arbolitos [] = Void                                                                                                 
+arbolitos [a] = Node a Void Void                                                                                    
+arbolitos (x:xs) = Node x (Void)(arbolitos xs)                                                                      
+                                                                                                                    
+-- | from. Ordena una lista usando la función f                                                                     
+from :: Ord a=> [a]->[a]                                                                                            
+from [] = []                                                                                                        
+from (x:xs) = f xs x [] 
 
--- | from. Función Auxilia ordena los elementos de la lista.
-from :: Ord a => [a] -> [a] ->[a]
-from  xs [] = fro1 xs
-from  [] ys = fro1 ys
-from (x:xs)(y:ys)
-  |  x <= y = (x:from xs (y:ys))
-  | otherwise = (y:(from (x:xs) ys))
-  
--- | arbolitos. Pasa una lista a un árbol.
-arbolitos :: [a] -> BTree a
-arbolitos    [] = Void
-arbolitos   [a] = (Node a Void Void)
-arbolitos (x:xs)= (Node x (arbolitos(half1 xs)) (arbolitos(half2 xs)))
-
-
--- | half1. Regresa la primera mitad de elementos en una lista.
-half1:: [a] ->[a]
-half1  [] = []
-half1 [a] = [a]
-half1  xs = take (div (length xs) 2) xs
-
--- | half2. Regresa la segunda  mitad de elementos en una lista.
-half2:: [a] ->[a]
-half2  [] = []
-half2 [a] = [a]
-half2  xs = drop (div (length xs) 2) xs
-
---------------------------------------------------------------------------------
---------                             PRUEBAS                            --------
---------------------------------------------------------------------------------
-t1=Node 33 ( Node 15 ( Node 10 ( Node 5 Void Void ) ( Node 12 Void Void ) ) ( Node 20 ( Node 18 Void Void ) ( Node 29 Void Void ) ) )( Node 47 ( Node 38 ( Node 36 Void Void ) ( Node 39 Void Void ) )( Node 51 ( Node 49 Void Void ) ( Node 100 Void Void ) ) )
+-- | Ordena la lista                                                                                                
+f:: Ord a => [a]->a->[a]->[a]                                                                                       
+f [] x l = x : from l                                                                                               
+f (x:xs) y ys                                                                                                       
+  |x<y  = f xs x (y:ys)                                                                                             
+  |otherwise = f xs y (x:ys)   
 
 
-nNodes1   = nNodes t1
-
-nLeaves1  = nLeaves t1
-
-nni1      = nni t1
-
-containsU1 = containsU 64 t1
-
-contains1 = contains 39 t1
-
-inorder1 = inorder t1
-
-preorder1 = preorder t1
-
-posorder1 = posorder t1
-
-add1 = add  3 t1
-
-fromList1 = fromList (preorder t1) 
