@@ -16,3 +16,5 @@
 - [Nuestras estructuras Pt2](https://github.com/Kary-AG/ED-2021/tree/main/P06)
 
 - [Nuestras estructuras Pt3](https://github.com/Kary-AG/ED-2021/tree/main/P07)
+
+- Participaciones
