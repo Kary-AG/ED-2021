@@ -7,9 +7,6 @@ data BTree a = Void
 data BT a = VoidL | Leaf a 
           | NodeL a (BT a) (BT a) deriving (Show , Eq)
 
-l = [1,1,1,2,2,3] -- => [(1,3), (2,2), (3,1)]
--- a = (b, Int)
-
 inserts :: (Num b, Ord a) => a -> BTree (a,b) -> BTree (a, b)
 inserts e Void             = Node (e, 1) Void Void
 inserts e (Node (a,b) l r) = if e == a
