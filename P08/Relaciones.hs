@@ -27,7 +27,7 @@ isAntisimetric  (x:xs) = if (snd x,fst x)`elem` xs then isAntisimetric (tail xs)
 dom :: [(a, b)] -> [a]
 dom [] = []
 dom [(a,b)] = [a]
-dom (x:xs) = [fst x] ++ dom xs
+dom (x:xs) = nub([fst x] ++ [snd x] ++ dom xs)
 
 -- | ide. Función identidad
 ide :: [b] -> [(b, b)]
