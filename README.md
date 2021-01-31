@@ -19,4 +19,4 @@
 
 - [Relaciones](https://github.com/Kary-AG/ED-2021/tree/main/P08)
 
-- Participaciones
+- [Participaciones](https://github.com/Kary-AG/ED-2021/tree/main/Participaciones)
