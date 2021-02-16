@@ -30,22 +30,20 @@ instance Compuerta Binary where
   (.¬.) Uno  = Cero
   (.¬.) Cero = Uno
 
-  (.^.) Cero _  = Cero
-  (.^.) _ Cero  = Cero
   (.^.) Uno Uno = Uno
+  (.^.) _ _     = Cero
 
-  (.|.) _ Uno      = Uno
-  (.|.) Uno _      = Uno
   (.|.) Cero Cero  = Cero
+  (.|.) _ _        = Uno
 
   -- xor
   p .+. q
-    | p == q    = Uno
-    | otherwise = Cero
+    | p == q    = Cero
+    | otherwise = Uno
 
   -- nand
   p .*. q
-    | p == q = Cero
+    | Uno Uno = Cero
     | otherwise = Uno
 
   -- nor
